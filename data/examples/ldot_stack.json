@@ -1,0 +1,84 @@
+{
+    "version": "1.0",
+    "stackName": "stack1",
+    "description": "Some stack",
+    "modules": [
+        "docker",
+        "gradlew",
+        "python3.7",
+        "git"
+    ],
+    "projects": [
+        {
+            "all": [
+                {
+                    "stage": "clone|fetch",
+                    "prerequisites": [
+                        "project1:clone",
+                        "project2:clone"
+                    ]
+                },
+                {
+                    "stage": "stop",
+                    "prerequisites": [
+                        "project1:stop",
+                        "project2:stop"
+                    ]
+                },
+                {
+                    "stage": "start",
+                    "prerequisites": [
+                        "project1:start",
+                        "project2:start"
+                    ]
+                }
+            ]
+        },
+        {
+            "project1": [
+                {
+                    "stage": "clone|fetch",
+                    "commands": [
+                        "git clone repo@git.com"
+                    ]
+                },
+                {
+                    "stage": "stop",
+                    "commands": [
+                        "docker stop project"
+                    ]
+                },
+                {
+                    "stage": "start",
+                    "commands": [
+                        "docker build",
+                        "docker run -d --name project"
+                    ]
+                }
+            ]
+        },
+        {
+            "project2": [
+                {
+                    "stage": "clone|fetch",
+                    "commands": [
+                        "git clone repo2@git.com"
+                    ]
+                },
+                {
+                    "stage": "stop",
+                    "commands": [
+                        "docker stop project2"
+                    ]
+                },
+                {
+                    "stage": "start",
+                    "commands": [
+                        "docker build",
+                        "docker run -d --name project2"
+                    ]
+                }
+            ]
+        }
+    ]
+}
