@@ -1,53 +1,120 @@
-use std::ffi::OsStr;
 use std::ffi::OsString;
 use std::path::PathBuf;
 
-use clap::{Args, Parser, Subcommand, ValueEnum};
+use clap::{command, Args, Parser, Subcommand};
 
-#[derive(Debug, Parser)] // requires `derive` feature
-#[command(name = "LDOT")]
-#[command(about = "A Local Development Orchestration Tool", long_about = None, author = "UndyingSoul", version = "1.0.0")]
-struct Cli {
+#[derive(Debug, Parser)]
+#[command(name = "LDOT", about = "A Local Development Orchestration Tool", long_about = None, author = "UndyingSoul", version = env!("CARGO_PKG_VERSION"), disable_help_flag = true, disable_version_flag = true)]
+pub struct Cli {
     #[command(subcommand)]
-    command: Commands,
+    pub command: Commands,
 }
 
 // Define the structure for command-line parameters
 #[derive(Debug, Subcommand)]
-enum Commands {
-    // Define the fields for command-line parameters
+pub enum Commands {
+    #[command(about = "Gets the version number of LDOT")]
+    Version,
 
-    #[arg(value_name = "COMMIT", short = "Gets the version number of LDOT")]
-    Version(),
+    #[command(
+        about = "Validates an LDOT file",
+        long_about = "Validates a specified LDOT file, making sure each key is correct, and valid."
+    )]
+    Validate(ValidateArgs),
 
-    #[arg(value_name = "COMMAND", short = "Prints help information")]
-    Help(Vec<OsString>),
+    #[command(
+        about = "Generates an LDOT file",
+        long_about = "Generates an LDOT file to be changed manually."
+    )]
+    Generate(GenerateArgs),
 
-    #[arg(value_name = "FILE", short = "Validates an LDOT file", long = "Validates a specified LDOT file, making sure each key is correct, and valid.", default_value = "ldot_stack.json")]
-    Validate(Option<PathBuf>),
+    #[command(
+        about = "Loads an LDOT file",
+        long_about = "Loads a specified LDOT file to be used anywhere. Validates before loading file."
+    )]
+    Load(LoadArgs),
 
-    #[arg(value_name = "FILE", short = "Generates an LDOT file", long = "Generates an LDOT file to be changed manually.", default_value = "ldot_stack.json")]
-    Generate(Option<PathBuf>),
-    
-    #[arg(value_name = "FILE", short = "Loads an LDOT file", long = "Loads a specified LDOT file to be used anywhere. Validates before loading file.", default_value = "ldot_stack.json")]
-    Load(Option<PathBuf>),
+    #[command(
+        about = "Unloads an LDOT file",
+        long_about = "Unloads a specified LDOT file, so it can no longer be used with LDOT."
+    )]
+    Unload(UnloadArgs),
 
-    #[arg(arg_required_else_help = true, value_name = "FILE", short = "Configures the LDOT utility")]
-    Config(Option<ConfigureArgs>),
+    #[command(about = "Configures the LDOT utility")]
+    Config(ConfigSubcommand),
+
+    #[command(about = "Executes an LDOT stack command")]
+    Execute(ExecuteArgs),
+
+    #[command(about = "Executes an LDOT script command")]
+    Script(ScriptArgs),
 }
 
 #[derive(Debug, Args)]
-#[command(args_conflicts_with_subcommands = true)]
-enum ConfigureArgs {
-    #[arg(short = "List registered configurations")]
-    List,
+pub struct ConfigSubcommand {
+    #[clap(subcommand)]
+    pub subcommand: ConfigArgs,
+}
 
-    #[arg(short = "Configures default stack")]
-    Default(String),
+#[derive(Debug, Args)]
+pub struct ValidateArgs {
+    #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
+    pub file: Option<PathBuf>,
+}
 
-    #[arg(short = "Prints the location of the configuration file")]
-    Edit,
+#[derive(Debug, Args)]
+pub struct GenerateArgs {
+    #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
+    pub file: Option<PathBuf>,
+}
 
-    #[arg(short = "Regenerates configuration file")]
-    Regenerate
+#[derive(Debug, Args)]
+pub struct LoadArgs {
+    #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
+    pub file: Option<PathBuf>,
+}
+#[derive(Debug, Args)]
+pub struct UnloadArgs {
+    #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
+    pub file: Option<PathBuf>,
+}
+
+#[derive(Debug, Subcommand)]
+pub enum ConfigArgs {
+    #[command(about = "Lists LDOT configurations")]
+    List(ListArgs),
+
+    #[command(about = "Sets default LDOT stack name")]
+    Default(DefaultArgs),
+
+    #[command(about = "Prints location of configuration file")]
+    Edit(EditArgs),
+
+    #[command(about = "Regenerates LDOT config file")]
+    Regenerate(RegenerateArgs),
+}
+
+#[derive(Debug, Args)]
+pub struct ListArgs;
+
+#[derive(Debug, Args)]
+pub struct DefaultArgs {
+    #[arg(help = "Stack name")]
+    pub stack: Option<OsString>,
+}
+
+#[derive(Debug, Args)]
+pub struct EditArgs;
+
+#[derive(Debug, Args)]
+pub struct RegenerateArgs;
+
+#[derive(Debug, Args)]
+pub struct ExecuteArgs {
+    args: Vec<OsString>, // Define fields for executing here
+}
+
+#[derive(Debug, Args)]
+pub struct ScriptArgs {
+    args: Vec<OsString>, // Define fields for executing here
 }
