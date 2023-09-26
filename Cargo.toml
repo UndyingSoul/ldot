@@ -1,9 +1,15 @@
 [package]
 name = "ldot"
+description = "The Local Development Orchestration tool, handy for maintaining your local dev environment and running scripts."
+authors = ["UndyingSoul"]
+homepage = "https://corbinwhitton.github.io"
+repository = "https://github.com/UndyingSoul/ldot"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "4"
+clap = {version = "4", features = ["derive"]}
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
