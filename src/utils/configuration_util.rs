@@ -1,3 +1,4 @@
+use directories::ProjectDirs;
 use serde_json;
 use std::fs;
 use std::path::Path;
@@ -6,12 +7,21 @@ use crate::models::ldot_config_json::Configuration;
 use crate::models::stack_config_json::StackConfig;
 use crate::utils::ldot_stack_util;
 
-// Define the path to your JSON configuration file.
-const CONFIG_FILE_PATH: &str = "./data/config.json";
-
+pub fn get_configuration_directory() -> String {
+    if let Some(proj_dirs) = ProjectDirs::from("com", "UndyingSoul",  "Ldot") {
+        return proj_dirs.config_dir().to_str().unwrap().to_string();
+        // Lin: /home/alice/.config/barapp
+        // Win: C:\Users\Alice\AppData\Roaming\Foo Corp\Bar App\config
+        // Mac: /Users/Alice/Library/Application Support/com.Foo-Corp.Bar-App
+    }
+    return "".to_string()
+}
 // Function to read the configuration from the JSON file.
 pub fn get_configuration() -> Result<Configuration, Box<dyn std::error::Error>> {
-    let config_path = Path::new(CONFIG_FILE_PATH);
+    let config_directory = get_configuration_directory();
+    let config_path = Path::new(config_directory.as_str());
+    let _ = config_path.join("config.json");
+
     if config_path.exists() {
         let config_str = fs::read_to_string(config_path)?;
         let config: Configuration = serde_json::from_str(&config_str)?;
@@ -39,7 +49,10 @@ pub fn get_configuration() -> Result<Configuration, Box<dyn std::error::Error>> 
 
 // Function to write the configuration to the JSON file.
 pub fn write_configuration(config: &Configuration) -> Result<(), Box<dyn std::error::Error>> {
-    let config_path = Path::new(CONFIG_FILE_PATH);
+    let config_directory = get_configuration_directory();
+    let config_path = Path::new(config_directory.as_str());
+    let _ = config_path.join("config.json");
+
     let config_str = serde_json::to_string_pretty(config)?;
     //println!("{}\n contents: \n{}", config_path.to_string_lossy(), config_str);
     fs::write(config_path, config_str)?;
@@ -111,6 +124,7 @@ pub fn set_default_stack(desired_stack: &str) -> Result<(), Box<dyn std::error::
 // Function to list the registered configurations.
 pub fn list_configurations() -> Result<(), Box<dyn std::error::Error>> {
     let config = get_configuration()?;
+    println!("Config file location: \"{}/config.json\"", get_configuration_directory());
     println!("Default Stack: {}", config.default_stack);
     println!("Registered Stack Files:");
     for file in &config.registered_stack_files {
