@@ -1,6 +1,16 @@
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/UndyingSoul/ldot/main.yml)
+![GitHub](https://img.shields.io/github/license/UndyingSoul/ldot)
+![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/UndyingSoul/ldot)
+![GitHub all releases](https://img.shields.io/github/downloads/UndyingSoul/ldot/total)
+
+[![OS - Linux](https://img.shields.io/badge/OS-Linux_x86-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Download") 
+[![OS - macOS](https://img.shields.io/badge/OS-macOS_x86-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/ "Go to Apple homepage") 
+[![OS - Windows](https://img.shields.io/badge/OS-Windows_x86-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage")
+
+
 # LDOT - Local Development Orchestration Tool
 
-![LDOT Logo](media/ldot-logo.png)
+<!-- ![LDOT Logo](media/ldot-logo.png) -->
 
 LDOT is a command-line tool designed to help DevOps Engineers manage local development environments efficiently. It provides a set of commands to streamline the setup, configuration, and execution of development stacks, making local development workflows smoother and more productive.
 
