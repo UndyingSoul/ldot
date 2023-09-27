@@ -1,0 +1,4 @@
+{
+    "defaultStack": "stack",
+    "registeredStackFiles": ["~/dev/project/projectFile.json", "~/dev/project2/ldot_stack.json"]
+}
