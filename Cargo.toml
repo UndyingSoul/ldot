@@ -4,7 +4,7 @@ description = "The Local Development Orchestration tool, handy for maintaining y
 authors = ["UndyingSoul"]
 homepage = "https://corbinwhitton.github.io"
 repository = "https://github.com/UndyingSoul/ldot"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
