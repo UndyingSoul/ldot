@@ -26,7 +26,7 @@ pub enum Commands {
         about = "Generates an LDOT file",
         long_about = "Generates an LDOT file to be changed manually."
     )]
-    Generate(GenerateArgs),
+    Generate,
 
     #[command(
         about = "Loads an LDOT file",
@@ -63,12 +63,6 @@ pub struct ValidateArgs {
 }
 
 #[derive(Debug, Args)]
-pub struct GenerateArgs {
-    #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
-    pub file: Option<PathBuf>,
-}
-
-#[derive(Debug, Args)]
 pub struct LoadArgs {
     #[arg(value_name = "FILE", default_value = "ldot_stack.json")]
     pub file: Option<PathBuf>,
@@ -87,10 +81,10 @@ pub enum ConfigArgs {
     #[command(about = "Sets default LDOT stack name")]
     Default(DefaultArgs),
 
-    #[command(about = "Prints location of configuration file")]
-    Edit(EditArgs),
+    // #[command(about = "Prints location of configuration file")]
+    // Edit(EditArgs),
 
-    #[command(about = "Regenerates LDOT config file")]
+    #[command(about = "Regenerates LDOT config file", alias = "reset")]
     Regenerate(RegenerateArgs),
 }
 
@@ -103,8 +97,8 @@ pub struct DefaultArgs {
     pub stack: Option<OsString>,
 }
 
-#[derive(Debug, Args)]
-pub struct EditArgs;
+// #[derive(Debug, Args)]
+// pub struct EditArgs;
 
 #[derive(Debug, Args)]
 pub struct RegenerateArgs;

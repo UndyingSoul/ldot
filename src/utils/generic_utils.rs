@@ -8,8 +8,7 @@ pub fn get_file_name_check_if_parent_dir_exists() -> String {
     let mut filename = String::new();
     let mut error = true;
     while error {
-        std::io::stdin().read_line(&mut filename).unwrap();
-        filename = filename.replace("\n", "");
+        get_line_from_console_allow_blank();
         if filename == "" {
             return filename;
         }
@@ -17,10 +16,10 @@ pub fn get_file_name_check_if_parent_dir_exists() -> String {
         if path.is_dir() {
             filename = filename + "/ldot_stack.json";
             path = Path::new(&filename);
-            println!("{:?} is a directory, appending default ldot stack file name. ({})",filename.replace("//", "/"), path.to_string_lossy());
+            println!("{:?} is a directory, appending default ldot stack file name. ({})",filename.replace("//", "/"), path.to_string_lossy().replace("//", "/"));
         }
 
-        println!("{:?} is a file", path);
+        //println!("{:?} is a file", path);
         if path.is_file() && path.exists() {
             println!("File already exists, use: ldot load \"{}\"", path.to_string_lossy());
         }
@@ -35,14 +34,14 @@ pub fn get_file_name_check_if_parent_dir_exists() -> String {
                 // std::process::exit(2);
             },
         };
-
-        // if parent_path.exists() {
-        //     error = false;
-        // } else {
-        //     println!("{}", parent_path.to_string_lossy());
-        //     println!("Invalid path")
-        // }
         filename = "".to_string();
     }
     return filename;
+}
+
+pub fn get_line_from_console_allow_blank() -> String {
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).unwrap();
+    input = input.replace("\n", "");
+    return input;
 }
