@@ -1,11 +1,11 @@
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/UndyingSoul/ldot/main.yml)
-![GitHub](https://img.shields.io/github/license/UndyingSoul/ldot)
-![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/UndyingSoul/ldot)
-![GitHub all releases](https://img.shields.io/github/downloads/UndyingSoul/ldot/total)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/UndyingSoul/ldot/main.yml)](https://github.com/UndyingSoul/ldot/actions "View Workflows")
+[![GitHub](https://img.shields.io/github/license/UndyingSoul/ldot)](https://github.com/UndyingSoul/ldot/LICENSE "View License")
+[![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/UndyingSoul/ldot)](https://github.com/UndyingSoul/ldot/releases "Go to Download")
+[![GitHub all releases](https://img.shields.io/github/downloads/UndyingSoul/ldot/total)](https://github.com/UndyingSoul/ldot/releases "Go to Download")
 
-[![OS - Linux](https://img.shields.io/badge/OS-Linux_x86-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Download") 
-[![OS - macOS](https://img.shields.io/badge/OS-macOS_x86-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/ "Go to Apple homepage") 
-[![OS - Windows](https://img.shields.io/badge/OS-Windows_x86-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage")
+[![OS - Linux](https://img.shields.io/badge/OS-Linux_x86-blue?logo=linux&logoColor=white)](https://github.com/UndyingSoul/ldot/releases "Go to Download") 
+[![OS - macOS](https://img.shields.io/badge/OS-macOS_x86-blue?logo=apple&logoColor=white)](https://github.com/UndyingSoul/ldot/releases "Go to Download") 
+[![OS - Windows](https://img.shields.io/badge/OS-Windows_x86-blue?logo=windows&logoColor=white)](https://github.com/UndyingSoul/ldot/releases "Go to Download")
 
 
 # LDOT - Local Development Orchestration Tool
