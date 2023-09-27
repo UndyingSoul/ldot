@@ -3,7 +3,7 @@ name: LDOT Project
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'Release v*.*.*'
 permissions:
   contents: write
 
